@@ -1,15 +1,111 @@
 <html>
 <style type="text/css">
-.bgimg {
-    background-image: url('images/tst.webp');
-    width: 840;
-    height: 400;
+
+:root {
+    --scaling: 1;
 }
-</style>
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(data/ja-jp.ttf);
+}
+
+.bgimg {
+    background-image: url('images/card/noelle.png');
+    /* width: 840;
+    height: 400; */
+    width: calc(84vw * var(--scaling));
+    height: calc(40vw * var(--scaling));
+    background-size: cover;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.aa {
+ background-image: url('images/char/Ningguang.png');
+
+    /* border-radius: 50%; */
+    width: calc(20vw * var(--scaling));
+    height: calc(20vw * var(--scaling));
+   position: absolute;
+    margin: auto;
+    top: calc(-1.5vw * var(--scaling));
+    left: calc(-2.5vw * var(--scaling));
+    right: 0;
+    bottom: 0;
+  background-size: cover;
+
+}
+
+img {
+  border-radius: 50%;
+    align-self: center;
+  width: 100%;
+  height: auto;
+  position: absolute;
+    margin: auto;
+    margin-top: calc(6vw * var(--scaling));
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  background-color: #DD8F5D;
+}
+
+
+.ui-corner-all {
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%; 
+    border: 1px solid rgb(236, 229, 216); 
+    /* margin: 2px;  */
+    background: #DD8F5D; 
+    width: 100%; 
+    height: 35%; 
+    overflow: hidden;
+    position: relative;
+    /* margin-top: 1vw; */
+    }
+
+
+.char_avatar {
+    margin-left: calc(5.7vw * var(--scaling));
+    /* margin-right: calc(5vw * var(--scaling)); */
+    width: 17.5%;
+    padding-top: calc(3vw * var(--scaling));
+    height: calc(100%);
+    display: inline-block;
+    float: left;
+}
+
+.infos {
+    --left-bord: calc(7.3vw * var(--scaling)); 
+    height: 100%;
+    /* background-color: olive; */
+    display: inline-block;
+    padding-left: var(--left-bord);
+    width: calc(100% - 17.5% - 5.7vw * var(--scaling) - var(--left-bord));
+}
+
+.name {
+    font-family: myFirstFont;
+    color: rgb(236, 229, 216)   ;
+    font-size: calc(5vw * var(--scaling));
+    margin-top: calc(3.5vw * var(--scaling));
+    margin-right: 2vw;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.06235997817095584) 4%, rgba(0,0,0,0.06235997817095584) 96%, rgba(255,255,255,0) 100%);</style>
 <body>
 
 <div class="bgimg">
-    div with background
+    <div class="char_avatar">
+        <div class="ui-corner-all">
+            <div class="aa"></div>
+        </div>  
+    </div>
+    <div class="infos">
+         <div class="name"> Ruddy </div>
+    </div>
 </div>
 
 </body>
