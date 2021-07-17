@@ -90,34 +90,6 @@
     margin-right: calc(3.3vw * var(--scaling));
 }
 
-/* Add a black background color to the top navigation */
-.topnav {
-  background-color: #333;
-  overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -133,15 +105,37 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+/* parent = document.getElementById("modalContent");
+    parent.style.display = "flex"
+    parent.style.height = "70%";
+    parent.style.borderRadius = "20px";
+    parent.style.justifyContent   = "space-between";
+    parent.style.flexWrap = "wrap";
+    parent.style.overflow = "scroll"; */
+
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  border-radius: 20px;
+  box-sizing:border-box;
+  border: 2px solid black;
 }
 
+.modal-window {
+    background-color: #fefefe;
+    width: 80%;
+    height: 70%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px;
+    overflow: auto;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -157,17 +151,157 @@
   cursor: pointer;
 }
 
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+::-webkit-scrollbar {
+    /* // Width of vertical scroll bar */
+    width: 8px;
+    /* // Height of horizontal scroll bar */
+    height: 10px;
+
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #c2c9d2;
+  }
+
+::-webkit-scrollbar-button:end:increment {
+    height: 3%;
+    display: block;
+    background: transparent;
+}
+
+::-webkit-scrollbar-button:start:increment {
+    height: 3%;
+    display: block;
+    background: transparent;
+}
+
 </style>
+
 <body>
 
-<div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-</div>
+    <div class="topnav" id="myTopnav">
+        <a href="#news" onclick="openChar()">Character Icon</a>
+        <div class="dropdown">
+          <button class="dropbtn">Cards 
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="#" onclick="openCardChar()">Character Cards</a>
+            <a href="#" onclick="openCardPermanent()">Permanent Cards</a>
+            <a href="#" onclick="openCardEvent()">Event Cards</a>
+            <a href="#" onclick="openCardReputation()">Reputation Cards</a>
+            <a href="#" onclick="openCardAchievement()">Achievement Cards</a>
+            <a href="#" onclick="openCardBattlepass()">Battlepass Cards</a>
+          </div>
+        </div> 
+        <a href="#about" onclick="downloadNamecard()">Download card</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+      </div>
 
-<div class="bgimg" id="card_pic">
+<div class="bgimg" id="card_pic" >
     <div class="char_avatar">
         <div class="ui-corner-all">
             <div class="avt_pic_class" id="avt_pic"></div>
@@ -179,29 +313,15 @@
     </div>
 </div>
 
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
-
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-    <div class="modal-content" id="modalContent">
+    <div class="modal-window">
         <div style="width: 100%;">
             <span class="close">&times;</span>
         </div>
-    </div>
-</div>
-
-<button id="myBtn2">Open Modal2</button>
-
-<!-- The Modal -->
-<div id="myModal2" class="modal">
-
-  <!-- Modal content -->
-    <div class="modal-content" id="modalContent2">
-        <div style="width: 100%;">
-            <span class="close">&times;</span>
+        <div class="modal-content" id="modalContent">
         </div>
     </div>
 </div>
@@ -209,41 +329,30 @@
 <script src="data/html2canvas.min.js"></script>
 
 <script>
-       
-    var btn2 = document.getElementById("myBtn2");
-    btn2.onclick = function() {
-        
+
+    function downloadNamecard() {
         html2canvas(document.querySelector("#card_pic")).then(canvas => {
+            canvas.style.width = '840px';
+            canvas.style.height = '400px';
             // document.body.appendChild(canvas);
             var link = document.createElement('a');
-            link.download = 'filename.png';
+            link.download = 'Genshin-Namecard.png';
             link.href = canvas.toDataURL()
             link.click();
-            // var myImage = canvas.toDataURL("image/png");
-            //create your own dialog with warning before saving file
-            //beforeDownloadReadMessage();
-            //Then download file
-            // downloadURI("data:" + myImage, "yourImage.png");
-        });
-    
-        // printToFile(document.querySelector("#card_pic"));
-        // alert("uhm");
+        }); 
     }
 
 </script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
-var modal2 = document.getElementById("myModal2");
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
-var btn2 = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-var span2 = document.getElementsByClassName("close")[1];
 
 function addChar(name, pic_name) {
     if (!pic_name) {
@@ -267,8 +376,13 @@ function addChar(name, pic_name) {
     pic.style.width = "100%";
     pic.onclick = function() {
         var avt_pic = document.getElementById("avt_pic");
-        avt_pic.style.backgroundImage = "url('" + this.src + "')";};
+        avt_pic.style.backgroundImage = "url('" + this.src + "')";
+        let modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    };
     pic.style.cursor = "hand";
+    pic.style.outline = "2px solid black";
+    pic.color = "#DD8F5D";
 
     div.appendChild(pic);
     div.appendChild(document.createTextNode(name));
@@ -277,7 +391,7 @@ function addChar(name, pic_name) {
     parent.appendChild(div)
 };
 
-function addCard(name, pic_name) {
+function addCard(folder, name, pic_name) {
     if (!pic_name) {
         pic_name = name.toLowerCase();
     }
@@ -290,40 +404,31 @@ function addCard(name, pic_name) {
     div.style.marginRight = "30px";
     div.style.marginLeft = "30px";
     div.style.margin = "30px";
-    // div.style.float = "left";
-    // div.style.marginRight = "calc((99% - 60%) / 2)";
-
 
     var pic = document.createElement("img");
-    pic.src = "images/card/char/" + pic_name + ".png";
+    pic.src = "images/card/" + folder + "/" + pic_name + ".png";
     pic.style.width = "100%";
     pic.onclick = function() {
         var card_pic = document.getElementById("card_pic");
-        card_pic.style.backgroundImage = "url('" + this.src + "')";};
+        card_pic.style.backgroundImage = "url('" + this.src + "')";
+        let modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    };
     pic.style.cursor = "hand";
-    // pic.style.border = "2px solid #0000FF";
     pic.style.outline = "2px solid black";
-    // pic.style.border = "20px solid red;"
 
     div.appendChild(pic);
     div.appendChild(document.createTextNode(name));
 
-    parent = document.getElementById("modalContent2");
+    parent = document.getElementById("modalContent");
     parent.appendChild(div)
 };
 
 // When the user clicks the button, open the modal 
-btn.onclick = function() {
+function openChar() {
+    $('#modalContent').empty();
     modal.style.display = "block";
-    parent = document.getElementById("modalContent");
-    parent.style.display = "flex"
-    parent.style.height = "70%";
-    parent.style.borderRadius = "20px";
-    parent.style.justifyContent   = "space-between";
-    parent.style.flexWrap = "wrap";
-    parent.style.overflow = "scroll";
-
-
+    
     var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
                       ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
                       ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
@@ -336,48 +441,77 @@ btn.onclick = function() {
     }
 }
 
-btn.onclick = function() {
+function openCardChar() {
+    $('#modalContent').empty();
     modal.style.display = "block";
-    parent = document.getElementById("modalContent");
-    parent.style.display = "flex"
-    parent.style.height = "70%";
-    parent.style.borderRadius = "20px";
-    parent.style.justifyContent   = "space-between";
-    parent.style.flexWrap = "wrap";
-    parent.style.overflow = "scroll";
 
-
-    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+    var cards = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
                       ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
                       ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
                       ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
                       ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
-                      ["Traveler/Aether", "Traveler_aether"], ["Traveler/Lumine", "Traveler_lumine"], 
                       ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
-    for (let i = 0; i < characters.length; i+=1) {
-        addChar(characters[i][0],characters[i][1]);
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("char", cards[i][0],cards[i][1]);
     }
 }
 
-btn2.onclick = function() {
-    modal2.style.display = "block";
-    parent = document.getElementById("modalContent2");
-    parent.style.display = "flex"
-    parent.style.height = "70%";
-    parent.style.borderRadius = "20px";
-    parent.style.justifyContent   = "space-between";
-    parent.style.flexWrap = "wrap";
-    parent.style.overflow = "scroll";
+function openCardPermanent() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+
+    var cards = [["A New World", "A_New_World"], ["Frostbearing Ancient Tree", "Frostbearing_Ancient_Tree"]];
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("permanent", cards[i][0],cards[i][1]);
+    }
+}
+
+function openCardEvent() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+
+    var cards = [["Hypostasis"], ["Lantern Light", "Lantern-Light"], ["Mechanicus"], ["Fruit of Wisdom", "Fruit_of_Wisdom"], 
+                 ["Peekaboo"], ["Vastness"], ["Kaboomball"], ["Battlesong"]];
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("event", cards[i][0],cards[i][1]);
+    }
+}
 
 
-    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
-                      ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
-                      ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
-                      ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
-                      ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
-                      ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
-    for (let i = 0; i < characters.length; i+=1) {
-        addCard(characters[i][0],characters[i][1]);
+function openCardReputation() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+
+    var cards = [["Mondstadt: Hero's Fame", "Mondstadt_Heros_Fame"], ["Mondstadt: Blessing", "Mondstadt_Blessing"],
+                 ["Liyue: A Thousand Ships", "Liyue_A_Thousand_Ships"], ["Liyue: In the Clouds", "Liyue_In_the_Clouds"]];
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("reputation", cards[i][0],cards[i][1]);
+    }
+}
+
+function openCardAchievement() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+
+    var cards = [["Bowmaster"], ["Challenger"], ["Challenger II", "Challenger_II"], ["Challenger III", "Challenger_III"],
+                 ["Cliffhanger"], ["Colors of the Rainbow", "Colors_of_the_Rainbow"], ["Deep & Dark", "Deep_Dark"],
+                 ["Explorer"], ["Hero"], ["Hill Dwellers", "Hill_Dwellers"], ["Reunion"], ["Snowy Land", "Snowy_Land"],
+                 ["Tea Time", "Tea_Time"], ["Vacation Home", "Vacation_Home"], ["Virtuoso"],
+                 ["Liyue: Stillness of Stone", "Liyue_Stillness_of_Stone"], ["Mondstadt: Whistling Wind", "Mondstadt_Whistling_Wind"]];
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("achievement", cards[i][0],cards[i][1]);
+    }
+}
+
+
+function openCardBattlepass() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+
+    var cards = [["Catch the Wind", "Catch_the_Wind"], ["Fading Star", "Fading_Star"], ["Chalk"], ["Mingxiao"],
+                 ["Windblume"], ["Sub-Space Recreation", "Sub-space_Recreation"], ["Midsummer"]];
+    for (let i = 0; i < cards.length; i+=1) {
+        addCard("battlepass", cards[i][0],cards[i][1]);
     }
 }
 
@@ -386,18 +520,34 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
-span2.onclick = function() {
-  modal2.style.display = "none";
-}
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target == modal || event.target == modal2) {
+  if (event.target == modal) {
     modal.style.display = "none";
-    modal2.style.display = "none";
   }
 }
 </script>
 
 </body>
+<script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+    </script>
 </html>
