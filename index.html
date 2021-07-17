@@ -22,15 +22,17 @@
 }
 
 .avt_pic_class {
- background-image: url('images/char/Ningguang.png');
+ background-image: url('images/char/eula.png');
 
     /* border-radius: 50%; */
-    width: calc(19.5vw * var(--scaling));
-    height: calc(19.5vw * var(--scaling));
+    --size: 17.5vw;
+    --half_size: calc(var(--size) * 0.5);
+    width: calc(17.5vw * var(--scaling));
+    height: calc(17.5vw * var(--scaling));
    position: absolute;
     margin: auto;
-    top: calc(-1.8vw * var(--scaling));
-    left: calc(-2.6vw * var(--scaling));
+    top: calc((8.8vw - var(--half_size))  * var(--scaling));
+    left: calc(-1.6vw * var(--scaling));
     right: 0;
     bottom: 0;
   background-size: cover;
@@ -303,13 +305,13 @@
 
 <div class="bgimg" id="card_pic" >
     <div class="char_avatar">
-        <div class="ui-corner-all">
+        <div class="ui-corner-all" onclick="openChar()">
             <div class="avt_pic_class" id="avt_pic"></div>
         </div>  
     </div>
     <div class="infos">
-        <div class="name"> Ruddy </div>
-        <div class="phrase"> Entrarão no meu bule adiantarão tudo </div>
+        <div class="name"> Nome_aqui </div>
+        <div class="phrase"> Frasesinha aqui </div>
     </div>
 </div>
 
