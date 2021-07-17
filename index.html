@@ -11,7 +11,7 @@
 }
 
 .bgimg {
-    background-image: url('images/card/noelle.png');
+    background-image: url('images/card/char/noelle.png');
     /* width: 840;
     height: 400; */
     width: calc(84vw * var(--scaling));
@@ -21,35 +21,20 @@
     overflow: hidden;
 }
 
-.aa {
+.avt_pic_class {
  background-image: url('images/char/Ningguang.png');
 
     /* border-radius: 50%; */
-    width: calc(20vw * var(--scaling));
-    height: calc(20vw * var(--scaling));
+    width: calc(19.5vw * var(--scaling));
+    height: calc(19.5vw * var(--scaling));
    position: absolute;
     margin: auto;
-    top: calc(-1.5vw * var(--scaling));
-    left: calc(-2.5vw * var(--scaling));
+    top: calc(-1.8vw * var(--scaling));
+    left: calc(-2.6vw * var(--scaling));
     right: 0;
     bottom: 0;
   background-size: cover;
 
-}
-
-img {
-  border-radius: 50%;
-    align-self: center;
-  width: 100%;
-  height: auto;
-  position: absolute;
-    margin: auto;
-    margin-top: calc(6vw * var(--scaling));
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  background-color: #DD8F5D;
 }
 
 
@@ -57,7 +42,7 @@ img {
     -moz-border-radius: 50%; 
     -webkit-border-radius: 50%; 
     border-radius: 50%; 
-    border: 1px solid rgb(236, 229, 216); 
+    border: 0.6vw solid rgb(236, 229, 216); 
     /* margin: 2px;  */
     background: #DD8F5D; 
     width: 100%; 
@@ -69,17 +54,17 @@ img {
 
 
 .char_avatar {
-    margin-left: calc(5.7vw * var(--scaling));
+    margin-left: calc(6.1vw * var(--scaling));
     /* margin-right: calc(5vw * var(--scaling)); */
-    width: 17.5%;
-    padding-top: calc(3vw * var(--scaling));
+    width: 17.0%;
+    padding-top: calc(4.2vw * var(--scaling));
     height: calc(100%);
     display: inline-block;
     float: left;
 }
 
 .infos {
-    --left-bord: calc(7.3vw * var(--scaling)); 
+    --left-bord: calc(7.0vw * var(--scaling)); 
     height: 100%;
     /* background-color: olive; */
     display: inline-block;
@@ -90,22 +75,329 @@ img {
 .name {
     font-family: myFirstFont;
     color: rgb(236, 229, 216)   ;
-    font-size: calc(5vw * var(--scaling));
-    margin-top: calc(3.5vw * var(--scaling));
-    margin-right: 2vw;
+    font-size: calc(4.5vw * var(--scaling));
+    margin-top: calc(4vw * var(--scaling));
+    margin-right: calc(2vw * var(--scaling));
     background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.06235997817095584) 4%, rgba(0,0,0,0.06235997817095584) 96%, rgba(255,255,255,0) 100%);</style>
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.06235997817095584) 4%, rgba(0,0,0,0.06235997817095584) 96%, rgba(255,255,255,0) 100%);
+}
+
+.phrase {
+    font-family: myFirstFont;
+    color: rgb(236, 229, 216)   ;
+    font-size: calc(2.84vw * var(--scaling));
+    margin-top: calc(1.6vw * var(--scaling));
+    margin-right: calc(3.3vw * var(--scaling));
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+</style>
 <body>
 
-<div class="bgimg">
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+</div>
+
+<div class="bgimg" id="card_pic">
     <div class="char_avatar">
         <div class="ui-corner-all">
-            <div class="aa"></div>
+            <div class="avt_pic_class" id="avt_pic"></div>
         </div>  
     </div>
     <div class="infos">
-         <div class="name"> Ruddy </div>
+        <div class="name"> Ruddy </div>
+        <div class="phrase"> Entrarão no meu bule adiantarão tudo </div>
     </div>
 </div>
 
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+    <div class="modal-content" id="modalContent">
+        <div style="width: 100%;">
+            <span class="close">&times;</span>
+        </div>
+    </div>
+</div>
+
+<button id="myBtn2">Open Modal2</button>
+
+<!-- The Modal -->
+<div id="myModal2" class="modal">
+
+  <!-- Modal content -->
+    <div class="modal-content" id="modalContent2">
+        <div style="width: 100%;">
+            <span class="close">&times;</span>
+        </div>
+    </div>
+</div>
+
+<script src="data/html2canvas.min.js"></script>
+
+<script>
+       
+    var btn2 = document.getElementById("myBtn2");
+    btn2.onclick = function() {
+        
+        html2canvas(document.querySelector("#card_pic")).then(canvas => {
+            // document.body.appendChild(canvas);
+            var link = document.createElement('a');
+            link.download = 'filename.png';
+            link.href = canvas.toDataURL()
+            link.click();
+            // var myImage = canvas.toDataURL("image/png");
+            //create your own dialog with warning before saving file
+            //beforeDownloadReadMessage();
+            //Then download file
+            // downloadURI("data:" + myImage, "yourImage.png");
+        });
+    
+        // printToFile(document.querySelector("#card_pic"));
+        // alert("uhm");
+    }
+
+</script>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+var modal2 = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+var btn2 = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close")[1];
+
+function addChar(name, pic_name) {
+    if (!pic_name) {
+        pic_name = name.toLowerCase();
+    }
+    var div = document.createElement("div");
+    div.style.width = "15%";
+    div.style.minWidth = "100px";
+    div.style.height = "auto";
+    div.style.textAlign = "Center";
+    div.style.display = "inline-block";
+    div.style.marginRight = "30px";
+    div.style.marginLeft = "30px";
+    div.style.margin = "30px";
+    // div.style.float = "left";
+    // div.style.marginRight = "calc((99% - 60%) / 2)";
+
+
+    var pic = document.createElement("img");
+    pic.src = "images/char/" + pic_name + ".png";
+    pic.style.width = "100%";
+    pic.onclick = function() {
+        var avt_pic = document.getElementById("avt_pic");
+        avt_pic.style.backgroundImage = "url('" + this.src + "')";};
+    pic.style.cursor = "hand";
+
+    div.appendChild(pic);
+    div.appendChild(document.createTextNode(name));
+
+    parent = document.getElementById("modalContent");
+    parent.appendChild(div)
+};
+
+function addCard(name, pic_name) {
+    if (!pic_name) {
+        pic_name = name.toLowerCase();
+    }
+    var div = document.createElement("div");
+    div.style.width = "25%";
+    div.style.minWidth = "100px";
+    div.style.height = "auto";
+    div.style.textAlign = "Center";
+    div.style.display = "inline-block";
+    div.style.marginRight = "30px";
+    div.style.marginLeft = "30px";
+    div.style.margin = "30px";
+    // div.style.float = "left";
+    // div.style.marginRight = "calc((99% - 60%) / 2)";
+
+
+    var pic = document.createElement("img");
+    pic.src = "images/card/char/" + pic_name + ".png";
+    pic.style.width = "100%";
+    pic.onclick = function() {
+        var card_pic = document.getElementById("card_pic");
+        card_pic.style.backgroundImage = "url('" + this.src + "')";};
+    pic.style.cursor = "hand";
+    // pic.style.border = "2px solid #0000FF";
+    pic.style.outline = "2px solid black";
+    // pic.style.border = "20px solid red;"
+
+    div.appendChild(pic);
+    div.appendChild(document.createTextNode(name));
+
+    parent = document.getElementById("modalContent2");
+    parent.appendChild(div)
+};
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+    parent = document.getElementById("modalContent");
+    parent.style.display = "flex"
+    parent.style.height = "70%";
+    parent.style.borderRadius = "20px";
+    parent.style.justifyContent   = "space-between";
+    parent.style.flexWrap = "wrap";
+    parent.style.overflow = "scroll";
+
+
+    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+                      ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
+                      ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
+                      ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
+                      ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
+                      ["Traveler/Aether", "Traveler_aether"], ["Traveler/Lumine", "Traveler_lumine"], 
+                      ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
+    for (let i = 0; i < characters.length; i+=1) {
+        addChar(characters[i][0],characters[i][1]);
+    }
+}
+
+btn.onclick = function() {
+    modal.style.display = "block";
+    parent = document.getElementById("modalContent");
+    parent.style.display = "flex"
+    parent.style.height = "70%";
+    parent.style.borderRadius = "20px";
+    parent.style.justifyContent   = "space-between";
+    parent.style.flexWrap = "wrap";
+    parent.style.overflow = "scroll";
+
+
+    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+                      ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
+                      ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
+                      ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
+                      ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
+                      ["Traveler/Aether", "Traveler_aether"], ["Traveler/Lumine", "Traveler_lumine"], 
+                      ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
+    for (let i = 0; i < characters.length; i+=1) {
+        addChar(characters[i][0],characters[i][1]);
+    }
+}
+
+btn2.onclick = function() {
+    modal2.style.display = "block";
+    parent = document.getElementById("modalContent2");
+    parent.style.display = "flex"
+    parent.style.height = "70%";
+    parent.style.borderRadius = "20px";
+    parent.style.justifyContent   = "space-between";
+    parent.style.flexWrap = "wrap";
+    parent.style.overflow = "scroll";
+
+
+    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+                      ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
+                      ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
+                      ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
+                      ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
+                      ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
+    for (let i = 0; i < characters.length; i+=1) {
+        addCard(characters[i][0],characters[i][1]);
+    }
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+span2.onclick = function() {
+  modal2.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal || event.target == modal2) {
+    modal.style.display = "none";
+    modal2.style.display = "none";
+  }
+}
+</script>
+
 </body>
+</html>
