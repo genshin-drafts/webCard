@@ -348,12 +348,11 @@
 
     function downloadNamecard() {
         html2canvas(document.querySelector("#card_pic")).then(canvas => {
-            // var resized_canvas = document.createElement('canvas');
+            var resized_canvas = document.createElement('canvas');
             resized_canvas.width = 840;
             resized_canvas.height = 400;
             var context = resized_canvas.getContext('2d');
             context.drawImage(canvas, 0, 0, 840, 400);
-            document.body.appendChild(resized_canvas);
             var link = document.createElement('a');
             link.download = 'Genshin-Namecard.png';
             link.href = resized_canvas.toDataURL()
