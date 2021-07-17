@@ -107,14 +107,6 @@
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* parent = document.getElementById("modalContent");
-    parent.style.display = "flex"
-    parent.style.height = "70%";
-    parent.style.borderRadius = "20px";
-    parent.style.justifyContent   = "space-between";
-    parent.style.flexWrap = "wrap";
-    parent.style.overflow = "scroll"; */
-
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
@@ -285,22 +277,24 @@
 <body>
 
     <div class="topnav" id="myTopnav">
-        <a href="#news" onclick="openChar()">Character Icon</a>
+        <a onclick="openChar()">Character Icon</a>
         <div class="dropdown">
           <button class="dropbtn">Cards 
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a href="#" onclick="openCardChar()">Character Cards</a>
-            <a href="#" onclick="openCardPermanent()">Permanent Cards</a>
-            <a href="#" onclick="openCardEvent()">Event Cards</a>
-            <a href="#" onclick="openCardReputation()">Reputation Cards</a>
-            <a href="#" onclick="openCardAchievement()">Achievement Cards</a>
-            <a href="#" onclick="openCardBattlepass()">Battlepass Cards</a>
+            <a onclick="openCardChar()">Character Cards</a>
+            <a onclick="openCardPermanent()">Permanent Cards</a>
+            <a onclick="openCardEvent()">Event Cards</a>
+            <a onclick="openCardReputation()">Reputation Cards</a>
+            <a onclick="openCardAchievement()">Achievement Cards</a>
+            <a onclick="openCardBattlepass()">Battlepass Cards</a>
           </div>
-        </div> 
-        <a href="#about" onclick="downloadNamecard()">Download card</a>
-        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+        </div>
+        <a onclick="getNameInput()">Name</a>
+        <a onclick="getPhraseInput()">Phrase</a> 
+        <a onclick="downloadNamecard()">Download card</a>
+        <a style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
 
 <div class="bgimg" id="card_pic" >
@@ -310,8 +304,8 @@
         </div>  
     </div>
     <div class="infos">
-        <div class="name"> Nome_aqui </div>
-        <div class="phrase"> Frasesinha aqui </div>
+        <div class="name" id="name_field"> Nome_aqui </div>
+        <div class="phrase" id="phrase_field"> Frasesinha aqui </div>
     </div>
 </div>
 
@@ -332,9 +326,29 @@
 
 <script>
 
+  function getNameInput() {
+    var name = window.prompt("Digite o nome desejado: ");
+    if (!name) {
+      return;
+    }
+    current_name = encodeURI(name);
+    updateHash();
+    updateThroughHash();
+  }
+
+  function getPhraseInput() {
+    var phrase = window.prompt("Digite a frase desejada: ");
+    if (!phrase) {
+      return;
+    }
+    current_phrase = encodeURI(phrase);
+    updateHash();
+    updateThroughHash();
+  }
+
     function downloadNamecard() {
         html2canvas(document.querySelector("#card_pic")).then(canvas => {
-            var resized_canvas = document.createElement('canvas');
+            // var resized_canvas = document.createElement('canvas');
             resized_canvas.width = 840;
             resized_canvas.height = 400;
             var context = resized_canvas.getContext('2d');
@@ -348,7 +362,7 @@
     }
 
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="data/jquery.min.js"></script>
 <script>
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -359,7 +373,14 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
-function addChar(name, pic_name) {
+function updateHash() {
+  let hash = "".concat("id=", current_card_type, current_card, current_char, "&name=", current_name, "&phrase=", current_phrase);
+  window.location.hash = '#' + hash;
+}
+
+function addChar(index) {
+    let name = characters[index][0];
+    let pic_name = characters[index][1];
     if (!pic_name) {
         pic_name = name.toLowerCase();
     }
@@ -372,19 +393,25 @@ function addChar(name, pic_name) {
     div.style.marginRight = "30px";
     div.style.marginLeft = "30px";
     div.style.margin = "30px";
-    // div.style.float = "left";
-    // div.style.marginRight = "calc((99% - 60%) / 2)";
-
 
     var pic = document.createElement("img");
     pic.src = "images/char/" + pic_name + ".png";
     pic.style.width = "100%";
-    pic.onclick = function() {
-        var avt_pic = document.getElementById("avt_pic");
-        avt_pic.style.backgroundImage = "url('" + this.src + "')";
+    pic.onclick = function(){
+      let local_index = index;
+      return function() {
         let modal = document.getElementById("myModal");
         modal.style.display = "none";
-    };
+        hexString = local_index.toString(16);
+        if (hexString.length == 1) {
+          hexString = "0".concat(hexString);
+        }
+        current_char = hexString;
+        updateHash();
+        updateThroughHash();
+      };
+    }();
+
     pic.style.cursor = "hand";
     pic.style.outline = "2px solid black";
     pic.color = "#DD8F5D";
@@ -396,7 +423,10 @@ function addChar(name, pic_name) {
     parent.appendChild(div)
 };
 
-function addCard(folder, name, pic_name) {
+function addCard(folder_index, card_index) {
+    folder = all_cards_categories[folder_index];
+    name = all_cards[folder_index][card_index][0];
+    pic_name = all_cards[folder_index][card_index][1];
     if (!pic_name) {
         pic_name = name;
     }
@@ -414,12 +444,30 @@ function addCard(folder, name, pic_name) {
     var pic = document.createElement("img");
     pic.src = "images/card/" + folder + "/" + pic_name + ".png";
     pic.style.width = "100%";
-    pic.onclick = function() {
-        var card_pic = document.getElementById("card_pic");
-        card_pic.style.backgroundImage = "url('" + this.src + "')";
+    pic.onclick =  function(){
+      let local_folder_index = folder_index;
+      let local_card_index = card_index;
+      return function() {
         let modal = document.getElementById("myModal");
         modal.style.display = "none";
-    };
+        folderHexString = folder_index.toString(16);
+        cardHexString = card_index.toString(16);
+        if (cardHexString.length == 1) {
+          cardHexString = "0".concat(cardHexString);
+        }
+        current_card_type = folderHexString;
+        current_card = cardHexString;
+        updateHash();
+        updateThroughHash();
+      };
+    }();
+    
+    // function() {
+    //     var card_pic = document.getElementById("card_pic");
+    //     card_pic.style.backgroundImage = "url('" + this.src + "')";
+    //     let modal = document.getElementById("myModal");
+    //     modal.style.display = "none";
+    // };
     pic.style.cursor = "hand";
     pic.style.outline = "2px solid black";
 
@@ -430,35 +478,54 @@ function addCard(folder, name, pic_name) {
     parent.appendChild(div)
 };
 
-// When the user clicks the button, open the modal 
-function openChar() {
-    $('#modalContent').empty();
-    modal.style.display = "block";
-    
-    var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+var characters = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
                       ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
                       ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
                       ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
                       ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
                       ["Traveler/Aether", "Traveler_aether"], ["Traveler/Lumine", "Traveler_lumine"], 
                       ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
+        
+// When the user clicks the button, open the modal 
+function openChar() {
+    $('#modalContent').empty();
+    modal.style.display = "block";
+    
     for (let i = 0; i < characters.length; i+=1) {
-        addChar(characters[i][0],characters[i][1]);
+        addChar(i);
     }
 }
+
+var cardsChars =  [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
+                 ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
+                 ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
+                 ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
+                 ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
+                 ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
+
+var cardsPermanent = [["A New World", "A_New_World"], ["Frostbearing Ancient Tree", "Frostbearing_Ancient_Tree"]];
+
+var cardsEvent = [["Hypostasis"], ["Lantern Light", "Lantern-Light"], ["Mechanicus"], ["Fruit of Wisdom", "Fruit_of_Wisdom"], 
+                 ["Peekaboo"], ["Vastness"], ["Kaboomball"], ["Battlesong"]];
+
+var cardsReputation = [["Mondstadt: Hero's Fame", "Mondstadt_Heros_Fame"], ["Mondstadt: Blessing", "Mondstadt_Blessing"],
+                 ["Liyue: A Thousand Ships", "Liyue_A_Thousand_Ships"], ["Liyue: In the Clouds", "Liyue_In_the_Clouds"]];
+
+var cardsAchievement = [["Bowmaster"], ["Challenger"], ["Challenger II", "Challenger_II"], ["Challenger III", "Challenger_III"],
+                 ["Cliffhanger"], ["Colors of the Rainbow", "Colors_of_the_Rainbow"], ["Deep & Dark", "Deep_Dark"],
+                 ["Explorer"], ["Hero"], ["Hill Dwellers", "Hill_Dwellers"], ["Reunion"], ["Snowy Land", "Snowy_Land"],
+                 ["Tea Time", "Tea_Time"], ["Vacation Home", "Vacation_Home"], ["Virtuoso"],
+                 ["Liyue: Stillness of Stone", "Liyue_Stillness_of_Stone"], ["Mondstadt: Whistling Wind", "Mondstadt_Whistling_Wind"]];
+
+var cardsBattlepass = [["Catch the Wind", "Catch_the_Wind"], ["Fading Star", "Fading_Star"], ["Chalk"], ["Mingxiao"],
+                 ["Windblume"], ["Sub-Space Recreation", "Sub-space_Recreation"], ["Midsummer"]];
 
 function openCardChar() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["Albedo"], ["Amber"], ["Barbara"], ["Beidou"], ["Bennet"],
-                      ["Chongyun"], ["Diluc"], ["Diona"], ["Eula"], ["Fischl"],
-                      ["Ganyu"], ["Hu Tao", "HuTao"], ["Jean"], ["Kaedehara Kazuha", "Kazuha"],
-                      ["Kaeya"], ["Keqing"], ["Klee"], ["Lisa"], ["Mona"], ["Ningguang"],
-                      ["Noelle"], ["Qiqi"], ["Razor"], ["Rosaria"], ["Sucrose"], ["Tartaglia"],
-                      ["Venti"], ["Xiangling"], ["Xiao"], ["Xingqiu"], ["Xinyan"], ["Yanfei"], ["Zhongli"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("char", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsChars.length; i+=1) {
+        addCard(2, i);
     }
 }
 
@@ -466,9 +533,8 @@ function openCardPermanent() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["A New World", "A_New_World"], ["Frostbearing Ancient Tree", "Frostbearing_Ancient_Tree"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("permanent", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsPermanent.length; i+=1) {
+        addCard(4, i);
     }
 }
 
@@ -476,10 +542,8 @@ function openCardEvent() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["Hypostasis"], ["Lantern Light", "Lantern-Light"], ["Mechanicus"], ["Fruit of Wisdom", "Fruit_of_Wisdom"], 
-                 ["Peekaboo"], ["Vastness"], ["Kaboomball"], ["Battlesong"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("event", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsEvent.length; i+=1) {
+        addCard(3, i);
     }
 }
 
@@ -488,10 +552,8 @@ function openCardReputation() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["Mondstadt: Hero's Fame", "Mondstadt_Heros_Fame"], ["Mondstadt: Blessing", "Mondstadt_Blessing"],
-                 ["Liyue: A Thousand Ships", "Liyue_A_Thousand_Ships"], ["Liyue: In the Clouds", "Liyue_In_the_Clouds"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("reputation", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsReputation.length; i+=1) {
+        addCard(5, i);
     }
 }
 
@@ -499,13 +561,8 @@ function openCardAchievement() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["Bowmaster"], ["Challenger"], ["Challenger II", "Challenger_II"], ["Challenger III", "Challenger_III"],
-                 ["Cliffhanger"], ["Colors of the Rainbow", "Colors_of_the_Rainbow"], ["Deep & Dark", "Deep_Dark"],
-                 ["Explorer"], ["Hero"], ["Hill Dwellers", "Hill_Dwellers"], ["Reunion"], ["Snowy Land", "Snowy_Land"],
-                 ["Tea Time", "Tea_Time"], ["Vacation Home", "Vacation_Home"], ["Virtuoso"],
-                 ["Liyue: Stillness of Stone", "Liyue_Stillness_of_Stone"], ["Mondstadt: Whistling Wind", "Mondstadt_Whistling_Wind"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("achievement", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsAchievement.length; i+=1) {
+        addCard(0, i);
     }
 }
 
@@ -514,10 +571,8 @@ function openCardBattlepass() {
     $('#modalContent').empty();
     modal.style.display = "block";
 
-    var cards = [["Catch the Wind", "Catch_the_Wind"], ["Fading Star", "Fading_Star"], ["Chalk"], ["Mingxiao"],
-                 ["Windblume"], ["Sub-Space Recreation", "Sub-space_Recreation"], ["Midsummer"]];
-    for (let i = 0; i < cards.length; i+=1) {
-        addCard("battlepass", cards[i][0],cards[i][1]);
+    for (let i = 0; i < cardsBattlepass.length; i+=1) {
+        addCard(1, i);
     }
 }
 
@@ -536,6 +591,69 @@ window.onclick = function(event) {
 
 </body>
 <script>
+  current_char = "01"
+  current_card_type = "1"
+  current_card = "01"
+  current_name = "Aether"
+  current_phrase = ""
+  all_cards_categories = ["achievement", "battlepass", "char", "event", "permanent", "reputation"]
+  all_cards = [cardsAchievement, cardsBattlepass, cardsChars, cardsEvent, cardsPermanent, cardsReputation]
+
+  function updateThroughHash() {
+    var hash = window.location.hash.substr(1);
+    var result = hash.split('&').reduce(function (res, item) {
+        var parts = item.split('=');
+        res[parts[0]] = parts[1];
+        return res;
+    }, {});
+    if (result.id) {
+      let card_type = result.id.substring(0,1);
+      let card_id = result.id.substring(1,3);
+      let char_id = result.id.substring(3,5);
+      current_card_type = card_type;
+      current_card = card_id;
+      current_char = char_id;
+
+      let selected_char = characters[parseInt(Number("0x" + char_id, 10))]
+      let char_pic_name = selected_char[1];
+      if (!selected_char[1]) {
+        char_pic_name = selected_char[0];
+      }
+      char_pic_name = char_pic_name.toLowerCase();
+
+      src = "images/char/" + char_pic_name + ".png";
+      var card_pic = document.getElementById("avt_pic");
+      card_pic.style.backgroundImage = "url('" + this.src + "')";
+
+      let selected_card = all_cards[parseInt(Number("0x" + card_type, 10))][parseInt(Number("0x" + card_id, 10))];
+      let card_pic_name = selected_card[1];
+      if (!selected_card[1]) {
+        card_pic_name = selected_card[0];
+      }
+      if (result.name) {
+        let name_div = document.getElementById("name_field");
+        name_div.textContent = decodeURI(result.name);
+        current_name = result.name;
+      }
+      if (result.phrase !== undefined) {
+        let phrase_div = document.getElementById("phrase_field");
+        phrase_div.textContent = decodeURI(result.phrase);
+        current_phrase = result.phrase;
+      }
+      card_pic_name = card_pic_name.toLowerCase();
+
+      src = "images/card/" + all_cards_categories[parseInt(Number("0x" + card_type, 10))] +
+            "/" + card_pic_name + ".png";
+      var card_pic = document.getElementById("card_pic");
+      card_pic.style.backgroundImage = "url('" + this.src + "')";
+      }
+  }
+
+  updateThroughHash();
+  // alert(result.id.substring(0,2))
+
+
+  
     /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */
     function myFunction() {
