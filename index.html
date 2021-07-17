@@ -382,8 +382,9 @@ function addChar(index) {
     let name = characters[index][0];
     let pic_name = characters[index][1];
     if (!pic_name) {
-        pic_name = name.toLowerCase();
+        pic_name = name;
     }
+    pic_name = pic_name.toLowerCase()
     var div = document.createElement("div");
     div.style.width = "15%";
     div.style.minWidth = "100px";
