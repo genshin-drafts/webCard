@@ -1,8 +1,12 @@
 <html>
+<head>
+  <title>Genshin WebCards</title>
+  <link rel="shortcut icon" href="data/titleImg.jfif">
 <style type="text/css">
 
 :root {
-    --scaling: 1;
+    --scaling: 0.7;
+    --background-color: #333;
 }
 
 @font-face {
@@ -10,68 +14,76 @@
   src: url(data/ja-jp.ttf);
 }
 
+body {
+  background: rgb(51,51,51);
+background: linear-gradient(180deg, rgba(51,51,51,1) 0%, rgba(20,22,79,1) 100%);
+  text-align: center;
+  margin: 0;
+}
+
+.title {
+  margin-top: 10vh;
+  font-family: myFirstFont;
+  font-size: 2em;
+  color: white;
+}
+
 .bgimg {
-    background-image: url('images/card/char/noelle.png');
-    /* width: 840;
-    height: 400; */
-    width: calc(84vw * var(--scaling));
-    height: calc(40vw * var(--scaling));
-    background-size: cover;
-    display: inline-block;
-    overflow: hidden;
+  background-image: url('images/card/permanent/a_new_world.png');
+  width: calc(84vw * var(--scaling));
+  height: calc(40vw * var(--scaling));
+  background-size: cover;
+  display: inline-block;
+  overflow: hidden;
+  text-align: left;
+  border-style: inset;
 }
 
 .avt_pic_class {
- background-image: url('images/char/eula.png');
-
-    /* border-radius: 50%; */
-    --size: 17.5vw;
-    --half_size: calc(var(--size) * 0.5);
-    width: calc(17.5vw * var(--scaling));
-    height: calc(17.5vw * var(--scaling));
-   position: absolute;
-    margin: auto;
-    top: calc((8.8vw - var(--half_size))  * var(--scaling));
-    left: calc(-1.6vw * var(--scaling));
-    right: 0;
-    bottom: 0;
+  background-image: url('images/char/traveler_aether.png');
+  --size: 17.5vw;
+  --half_size: calc(var(--size) * 0.5);
+  width: calc(17.5vw * var(--scaling));
+  height: calc(17.5vw * var(--scaling));
+  position: absolute;
+  margin: auto;
+  top: calc((8.8vw - var(--half_size))  * var(--scaling));
+  left: calc(-1.6vw * var(--scaling));
+  right: 0;
+  bottom: 0;
   background-size: cover;
-
 }
 
-
 .ui-corner-all {
-    -moz-border-radius: 50%; 
-    -webkit-border-radius: 50%; 
-    border-radius: 50%; 
-    border: 0.6vw solid rgb(236, 229, 216); 
-    /* margin: 2px;  */
-    background: #DD8F5D; 
-    width: 100%; 
-    height: 35%; 
-    overflow: hidden;
-    position: relative;
-    /* margin-top: 1vw; */
-    }
+  -moz-border-radius: 50%; 
+  -webkit-border-radius: 50%; 
+  border-radius: 50%; 
+  border: 0.6vw solid rgb(236, 229, 216);
+  background: #DD8F5D; 
+  width: 100%; 
+  height: 35%; 
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  }
 
 
 .char_avatar {
-    margin-left: calc(6.1vw * var(--scaling));
-    /* margin-right: calc(5vw * var(--scaling)); */
-    width: 17.0%;
-    padding-top: calc(4.2vw * var(--scaling));
-    height: calc(100%);
-    display: inline-block;
-    float: left;
+  margin-left: calc(6.1vw * var(--scaling));
+  /* margin-right: calc(5vw * var(--scaling)); */
+  width: 17.0%;
+  padding-top: calc(4.2vw * var(--scaling));
+  height: calc(100%);
+  display: inline-block;
+  float: left;
 }
 
 .infos {
-    --left-bord: calc(7.0vw * var(--scaling)); 
-    height: 100%;
-    /* background-color: olive; */
-    display: inline-block;
-    padding-left: var(--left-bord);
-    width: calc(100% - 17.5% - 5.7vw * var(--scaling) - var(--left-bord));
+  --left-bord: calc(7.0vw * var(--scaling)); 
+  height: 100%;
+  display: inline-block;
+  padding-left: var(--left-bord);
+  width: calc(100% - 17.5% - 5.7vw * var(--scaling) - var(--left-bord));
 }
 
 .name {
@@ -94,6 +106,7 @@
 
 /* The Modal (background) */
 .modal {
+  font-family: myFirstFont;
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -109,7 +122,8 @@
 
 /* Modal Content */
 .modal-content {
-  background-color: #fefefe;
+  background: rgb(88,152,185);
+  background: linear-gradient(180deg, rgba(88,152,185,1) 0%, rgba(52,34,157,1) 100%);
   width: 100%;
   height: 90%;
   display: flex;
@@ -118,11 +132,12 @@
   overflow-y: scroll;
   border-radius: 20px;
   box-sizing:border-box;
-  border: 2px solid black;
+  border: 2px dotted black;
 }
 
 .modal-window {
-    background-color: #fefefe;
+    background-color: rgb(217, 215, 233);
+    color: rgb(227, 244, 255);
     width: 80%;
     height: 70%;
     margin: auto;
@@ -146,8 +161,11 @@
 }
 
 .topnav {
-  overflow: hidden;
-  background-color: #333;
+  /* overflow: hidden; */
+  background-color: var(--background-color);
+  cursor: default;
+  margin: 0 auto;
+  font-family: myFirstFont;
 }
 
 .topnav a {
@@ -194,7 +212,7 @@
   z-index: 1;
 }
 
-.dropdown-content a {
+.dropdown-content .dropdown-item {
   float: none;
   color: black;
   padding: 12px 16px;
@@ -208,44 +226,13 @@
   color: white;
 }
 
-.dropdown-content a:hover {
+.dropdown-content .dropdown-item:hover {
   background-color: #ddd;
   color: black;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child), .dropdown .dropbtn {
-    display: none;
-  }
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  .topnav.responsive .dropdown {float: none;}
-  .topnav.responsive .dropdown-content {position: relative;}
-  .topnav.responsive .dropdown .dropbtn {
-    display: block;
-    width: 100%;
-    text-align: left;
-  }
 }
 
 ::-webkit-scrollbar {
@@ -272,40 +259,58 @@
     background: transparent;
 }
 
+
+.topnav-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--background-color);
+}
 </style>
 
 <body>
-
+  <div class="topnav-container">
     <div class="topnav" id="myTopnav">
-        <a onclick="openChar()">Character Icon</a>
-        <div class="dropdown">
-          <button class="dropbtn">Cards 
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <a onclick="openCardChar()">Character Cards</a>
-            <a onclick="openCardPermanent()">Permanent Cards</a>
-            <a onclick="openCardEvent()">Event Cards</a>
-            <a onclick="openCardReputation()">Reputation Cards</a>
-            <a onclick="openCardAchievement()">Achievement Cards</a>
-            <a onclick="openCardBattlepass()">Battlepass Cards</a>
-          </div>
+      <div class="dropdown">
+        <button class="dropbtn">Visibilidade  
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content" id="visibilityDropdown">
+          <label  class="dropdown-item"><input type="checkbox" id="checkboxName"  onclick="handleCheckbox()" checked> Nome</label>
+          <label  class="dropdown-item"><input type="checkbox" id="checkboxPhrase" onclick="handleCheckbox()" checked> Assinatura</label>
+          <label  class="dropdown-item"><input type="checkbox" id="checkboxIcon" onclick="handleCheckbox()" checked> Avatar</label>
         </div>
-        <a onclick="getNameInput()">Name</a>
-        <a onclick="getPhraseInput()">Phrase</a> 
-        <a onclick="downloadNamecard()">Download card</a>
-        <a style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
       </div>
+      <a onclick="openChar()">Avatar</a>
+      <div class="dropdown">
+        <button class="dropbtn">Cartões
+          <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+          <a onclick="openCardChar()" class="dropdown-item">Cartões de Personagens</a>
+          <a onclick="openCardPermanent()" class="dropdown-item">Cartões Permanentes</a>
+          <a onclick="openCardEvent()" class="dropdown-item">Cartões de Eventos</a>
+          <a onclick="openCardReputation()" class="dropdown-item">Cartões de Reputação</a>
+          <a onclick="openCardAchievement()" class="dropdown-item">Cartões de Conquistas</a>
+          <a onclick="openCardBattlepass()" class="dropdown-item">Cartões do Passe de Batalha</a>
+        </div>
+      </div>
+      <a onclick="getNameInput()">Nome</a>
+      <a onclick="getPhraseInput()">Assinatura</a> 
+      <a onclick="downloadNamecard()">Download do cartão</a>
+    </div>
+  </div>
 
-<div class="bgimg" id="card_pic" >
+  <h1 class="title"> Cartão gerado</h1>
+  <div class="bgimg" id="card_pic" >
     <div class="char_avatar">
-        <div class="ui-corner-all" onclick="openChar()">
+        <div class="ui-corner-all" onclick="openChar()" id="char_icon">
             <div class="avt_pic_class" id="avt_pic"></div>
         </div>  
     </div>
     <div class="infos">
-        <div class="name" id="name_field"> Nome_aqui </div>
-        <div class="phrase" id="phrase_field"> Frasesinha aqui </div>
+        <div class="name" id="name_field"> Aether </div>
+        <div class="phrase" id="phrase_field"> Sem assinatura </div>
     </div>
 </div>
 
@@ -325,39 +330,53 @@
 <script src="data/html2canvas.min.js"></script>
 
 <script>
+  function handleCheckbox() {
+    let checkboxName = document.getElementById("checkboxName");
+    let checkboxPhrase = document.getElementById("checkboxPhrase");
+    let checkboxIcon = document.getElementById("checkboxIcon");
+    let binString = "".concat((+ checkboxIcon.checked).toString(), (+ checkboxName.checked).toString(), (+ checkboxPhrase.checked).toString())
+    current_visibilities = binString;
+    updateHash();
+    updateThroughHash();
+  }
+</script>
+
+<script>
 
   function getNameInput() {
     var name = window.prompt("Digite o nome desejado: ");
+    let checkboxName = document.getElementById("checkboxName");
     if (!name) {
       return;
     }
     current_name = encodeURI(name);
-    updateHash();
-    updateThroughHash();
+    checkboxName.checked = true;
+    handleCheckbox();
   }
 
   function getPhraseInput() {
     var phrase = window.prompt("Digite a frase desejada: ");
+    let checkboxPhrase = document.getElementById("checkboxPhrase");
     if (!phrase) {
       return;
     }
     current_phrase = encodeURI(phrase);
-    updateHash();
-    updateThroughHash();
+    checkboxPhrase.checked = true;
+    handleCheckbox();
   }
 
-    function downloadNamecard() {
-        html2canvas(document.querySelector("#card_pic")).then(canvas => {
-            var resized_canvas = document.createElement('canvas');
-            resized_canvas.width = 840;
-            resized_canvas.height = 400;
-            var context = resized_canvas.getContext('2d');
-            context.drawImage(canvas, 0, 0, 840, 400);
-            var link = document.createElement('a');
-            link.download = 'Genshin-Namecard.png';
-            link.href = resized_canvas.toDataURL()
-            link.click();
-        }); 
+  function downloadNamecard() {
+      html2canvas(document.querySelector("#card_pic")).then(canvas => {
+          var resized_canvas = document.createElement('canvas');
+          resized_canvas.width = 840;
+          resized_canvas.height = 400;
+          var context = resized_canvas.getContext('2d');
+          context.drawImage(canvas, 0, 0, 840, 400);
+          var link = document.createElement('a');
+          link.download = 'Genshin-Namecard.png';
+          link.href = resized_canvas.toDataURL()
+          link.click();
+      }); 
     }
 
 </script>
@@ -373,7 +392,8 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 function updateHash() {
-  let hash = "".concat("id=", current_card_type, current_card, current_char, "&name=", current_name, "&phrase=", current_phrase);
+  let hash = "".concat("id=", current_card_type, current_card, current_char, "&name=", current_name,
+                       "&phrase=", current_phrase, "&visibility=" + current_visibilities);
   window.location.hash = '#' + hash;
 }
 
@@ -397,6 +417,7 @@ function addChar(index) {
     var pic = document.createElement("img");
     pic.src = "images/char/" + pic_name + ".png";
     pic.style.width = "100%";
+    pic.style.background = "#DD8F5D";
     pic.onclick = function(){
       let local_index = index;
       return function() {
@@ -461,13 +482,7 @@ function addCard(folder_index, card_index) {
         updateThroughHash();
       };
     }();
-    
-    // function() {
-    //     var card_pic = document.getElementById("card_pic");
-    //     card_pic.style.backgroundImage = "url('" + this.src + "')";
-    //     let modal = document.getElementById("myModal");
-    //     modal.style.display = "none";
-    // };
+
     pic.style.cursor = "hand";
     pic.style.outline = "2px solid black";
 
@@ -591,11 +606,12 @@ window.onclick = function(event) {
 
 </body>
 <script>
-  current_char = "01"
-  current_card_type = "1"
-  current_card = "01"
+  current_char = "1a"     // Aether
+  current_card_type = "4" // Permanent card
+  current_card = "00"     // Begginer card
   current_name = "Aether"
-  current_phrase = ""
+  current_phrase = "Sem assinatura"
+  current_visibilities = "111"
   all_cards_categories = ["achievement", "battlepass", "char", "event", "permanent", "reputation"]
   all_cards = [cardsAchievement, cardsBattlepass, cardsChars, cardsEvent, cardsPermanent, cardsReputation]
 
@@ -606,6 +622,7 @@ window.onclick = function(event) {
         res[parts[0]] = parts[1];
         return res;
     }, {});
+
     if (result.id) {
       let card_type = result.id.substring(0,1);
       let card_id = result.id.substring(1,3);
@@ -613,65 +630,72 @@ window.onclick = function(event) {
       current_card_type = card_type;
       current_card = card_id;
       current_char = char_id;
+    }  
+    let selected_char = characters[parseInt(Number("0x" + current_char, 10))]
+    let char_pic_name = selected_char[1];
+    if (!selected_char[1]) {
+      char_pic_name = selected_char[0];
+    }
+    char_pic_name = char_pic_name.toLowerCase();
 
-      let selected_char = characters[parseInt(Number("0x" + char_id, 10))]
-      let char_pic_name = selected_char[1];
-      if (!selected_char[1]) {
-        char_pic_name = selected_char[0];
-      }
-      char_pic_name = char_pic_name.toLowerCase();
+    src = "images/char/" + char_pic_name + ".png";
+    var card_pic = document.getElementById("avt_pic");
+    card_pic.style.backgroundImage = "url('" + this.src + "')";
 
-      src = "images/char/" + char_pic_name + ".png";
-      var card_pic = document.getElementById("avt_pic");
-      card_pic.style.backgroundImage = "url('" + this.src + "')";
+    let selected_card = all_cards[parseInt(Number("0x" + current_card_type, 10))][parseInt(Number("0x" + current_card, 10))];
+    let card_pic_name = selected_card[1];
+    if (!selected_card[1]) {
+      card_pic_name = selected_card[0];
+    }
+    card_pic_name = card_pic_name.toLowerCase();
 
-      let selected_card = all_cards[parseInt(Number("0x" + card_type, 10))][parseInt(Number("0x" + card_id, 10))];
-      let card_pic_name = selected_card[1];
-      if (!selected_card[1]) {
-        card_pic_name = selected_card[0];
-      }
-      if (result.name) {
-        let name_div = document.getElementById("name_field");
-        name_div.textContent = decodeURI(result.name);
-        current_name = result.name;
-      }
-      if (result.phrase !== undefined) {
-        let phrase_div = document.getElementById("phrase_field");
-        phrase_div.textContent = decodeURI(result.phrase);
-        current_phrase = result.phrase;
-      }
-      card_pic_name = card_pic_name.toLowerCase();
+    src = "images/card/" + all_cards_categories[parseInt(Number("0x" + current_card_type, 10))] +
+          "/" + card_pic_name + ".png";
+    var card_pic = document.getElementById("card_pic");
+    card_pic.style.backgroundImage = "url('" + this.src + "')";
+    
+    if (result.name) {
+      current_name = result.name;
+    }
+    let name_div = document.getElementById("name_field");
+    name_div.textContent = decodeURI(current_name);
 
-      src = "images/card/" + all_cards_categories[parseInt(Number("0x" + card_type, 10))] +
-            "/" + card_pic_name + ".png";
-      var card_pic = document.getElementById("card_pic");
-      card_pic.style.backgroundImage = "url('" + this.src + "')";
-      }
+    if (result.phrase !== undefined) {
+      current_phrase = result.phrase;
+    }
+    let phrase_div = document.getElementById("phrase_field");
+    phrase_div.textContent = decodeURI(current_phrase);
+
+    if (result.visibility !== undefined) {
+      current_visibilities = result.visibility;
+    }
+    let icon_div = document.getElementById("char_icon");
+    let checkboxName = document.getElementById("checkboxName");
+    let checkboxPhrase = document.getElementById("checkboxPhrase");
+    let checkboxIcon = document.getElementById("checkboxIcon");
+
+    icon_div.style.visibility = current_visibilities[0] == 1 ? "visible" : "hidden";
+    name_div.style.visibility = current_visibilities[1] == 1 ? "visible" : "hidden";
+    phrase_div.style.visibility = current_visibilities[2] == 1 ? "visible" : "hidden";
+    checkboxIcon.checked = parseInt(current_visibilities[0]);
+    checkboxName.checked = parseInt(current_visibilities[1]);
+    checkboxPhrase.checked = parseInt(current_visibilities[2]);
   }
 
   updateThroughHash();
-  // alert(result.id.substring(0,2))
-
-
-  
-    /* When the user clicks on the button, 
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
     
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
         }
       }
     }
-    </script>
+  }
+</script>
 </html>
